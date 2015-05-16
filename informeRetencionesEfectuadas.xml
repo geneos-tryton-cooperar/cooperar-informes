@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tryton>
+    <data>
+
+        <!-- Report Cuotas Sostenimiento-->
+        <record model="ir.action.report" id="imprimir_informeretencionesefectuadas">
+            <field name="name">Reporte Retenciones Efectuadas</field>
+            <field name="report_name">cooperar-informes.informe_retencionesefectuadas</field>
+            <field name="model">cooperar-informes.informe_retencionesefectuadas</field>
+            <field name="report">cooperar-informes/informeRetencionesEfectuadas.odt</field>
+        </record>
+
+        <!-- Wizard -->
+        <record model="ir.action.wizard" id="wizard_configRetencionesEfectuadas">
+            <field name="name">Configuracion Informe de Retenciones Efectuadas</field>
+            <field name="wiz_name">cooperar-informes.retencionesefectuadas</field>
+        </record>
+
+        <record model="ir.ui.view" id="view_retenciones_efectuadas_form">
+            <field name="model">cooperar-informes.vistaretencionesefectuadas.start</field>
+            <field name="type">form</field>
+            <field name="name">retenciones_efectuadas_form</field>
+        </record>
+
+        <menuitem name="Retenciones Efectuadas" parent="menu_i1" sequence="0" id="menu_iu11" icon="tryton-preferences" action="wizard_configRetencionesEfectuadas"/>
+
+    </data>
+</tryton>

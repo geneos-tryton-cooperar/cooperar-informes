@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<form string="Configuracion Parametros de Entrada">
+    <label name="facturado_del_mes" string="Facturado el Mes"/>
+    <field name="facturado_del_mes"/>
+    <label name="facturado_del_anio" string="Facturado el año"/>
+    <field name="facturado_del_anio"/>
+</form>

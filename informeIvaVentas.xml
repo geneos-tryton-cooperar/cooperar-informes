@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tryton>
+    <data>
+
+        <!-- Report Iva Ventas-->
+        <record model="ir.action.report" id="imprimir_informeivaventas">
+            <field name="name">Reporte Iva Ventas</field>
+            <field name="report_name">cooperar-informes.informe_ivaventas</field>
+            <field name="model">cooperar-informes.informe_ivaventas</field>
+            <field name="report">cooperar-informes/informeIvaVentas.odt</field>
+        </record>
+
+        <!-- Wizard -->
+        <record model="ir.action.wizard" id="wizard_configIvaVentas">
+            <field name="name">Configuracion Informe de Iva Ventas</field>
+            <field name="wiz_name">cooperar-informes.ivaventas</field>
+        </record>
+
+        <record model="ir.ui.view" id="view_iva_ventas_form">
+            <field name="model">cooperar-informes.vistaivaventas.start</field>
+            <field name="type">form</field>
+            <field name="name">iva_ventas_form</field>
+        </record>
+
+        <menuitem name="Iva Ventas" parent="menu_i1" sequence="0" id="menu_iu14" icon="tryton-preferences" action="wizard_configIvaVentas"/>
+
+    </data>
+</tryton>

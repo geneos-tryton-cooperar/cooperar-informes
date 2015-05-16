@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tryton>
+    <data>
+
+        <!-- Report Cuotas Sostenimiento-->
+        <record model="ir.action.report" id="imprimir_informepagosporconvenio">
+            <field name="name">Reporte Pagos por Convenio</field>
+            <field name="report_name">cooperar-informes.informe_pagosporconvenio</field>
+            <field name="model">cooperar-informes.informe_pagosporconvenio</field>
+            <field name="report">cooperar-informes/informePagosPorConvenio.odt</field>
+        </record>
+
+        <!-- Wizard -->
+        <record model="ir.action.wizard" id="wizard_configPagosPorConvenio">
+            <field name="name">Configuracion Informe de Pagos por Convenio</field>
+            <field name="wiz_name">cooperar-informes.pagosporconvenio</field>
+        </record>
+
+        <record model="ir.ui.view" id="view_pagos_por_convenio_form">
+            <field name="model">cooperar-informes.vistapagosporconvenio.start</field>
+            <field name="type">form</field>
+            <field name="name">pagos_por_convenio_form</field>
+        </record>
+
+        <menuitem name="Pagos por Convenio" parent="menu_i1" sequence="0" id="menu_iu13" icon="tryton-preferences" action="wizard_configPagosPorConvenio"/>
+
+    </data>
+</tryton>

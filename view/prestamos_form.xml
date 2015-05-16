@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<form string="Configuracion Parametros de Entrada">
+    <label name="asociada" string="Asociada"/>
+    <field name="asociada"/>
+</form>
+

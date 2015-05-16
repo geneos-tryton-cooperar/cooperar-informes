@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tryton>
+    <data>
+
+        <!-- Report Iva Compras-->
+        <record model="ir.action.report" id="imprimir_informeivacompras">
+            <field name="name">Reporte Iva Compras</field>
+            <field name="report_name">cooperar-informes.informe_ivacompras</field>
+            <field name="model">cooperar-informes.informe_ivacompras</field>
+            <field name="report">cooperar-informes/informeIvaCompras.odt</field>
+        </record>
+
+        <!-- Wizard -->
+        <record model="ir.action.wizard" id="wizard_configIvaCompras">
+            <field name="name">Configuracion Informe de Iva Compras</field>
+            <field name="wiz_name">cooperar-informes.ivacompras</field>
+        </record>
+
+        <record model="ir.ui.view" id="view_iva_compras_form">
+            <field name="model">cooperar-informes.vistaivacompras.start</field>
+            <field name="type">form</field>
+            <field name="name">iva_compras_form</field>
+        </record>
+
+        <menuitem name="Iva Compras" parent="menu_i1" sequence="0" id="menu_iu15" icon="tryton-preferences" action="wizard_configIvaCompras"/>
+
+    </data>
+</tryton>

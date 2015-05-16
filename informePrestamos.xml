@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tryton>
+    <data>
+
+        <!-- Report Cuotas Sostenimiento-->
+        <record model="ir.action.report" id="imprimir_informeprestamos">
+            <field name="name">Reporte Prestamos</field>
+            <field name="report_name">cooperar-informes.informe_prestamos</field>
+            <field name="model">cooperar-informes.informe_prestamos</field>
+            <field name="report">cooperar-informes/informePrestamos.odt</field>
+        </record>
+
+        <!-- Wizard -->
+        <record model="ir.action.wizard" id="wizard_configPrestamos">
+            <field name="name">Configuracion Informe de Prestamos</field>
+            <field name="wiz_name">cooperar-informes.prestamos</field>
+        </record>
+
+        <record model="ir.ui.view" id="view_prestamos_form">
+            <field name="model">cooperar-informes.vistaprestamos.start</field>
+            <field name="type">form</field>
+            <field name="name">prestamos_form</field>
+        </record>
+
+        <menuitem name="Prestamos" parent="menu_i1" sequence="0" id="menu_iu12" icon="tryton-preferences" action="wizard_configPrestamos"/>
+
+    </data>
+</tryton>

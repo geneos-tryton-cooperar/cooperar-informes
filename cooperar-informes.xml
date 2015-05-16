@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tryton>
+    <data>
+        <menuitem name="Informes" sequence="16" id="menu_i1" icon="tryton-list"/>
+    </data>
+</tryton>

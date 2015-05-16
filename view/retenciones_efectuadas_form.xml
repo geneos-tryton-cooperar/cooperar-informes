@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<form string="Configuracion Parametros de Entrada">
+    <label name="desde_date" string="Desde"/>
+    <field name="desde_date"/>
+    <label name="hasta_date" string="Hasta"/>
+    <field name="hasta_date"/>
+</form>

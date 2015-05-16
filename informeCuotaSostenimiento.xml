@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tryton>
+    <data>
+
+        <!-- Report Cuotas Sostenimiento-->
+        <record model="ir.action.report" id="imprimir_informecuotasostenimiento">
+            <field name="name">Reporte Cuota Sostenimiento (Deuda)</field>
+            <field name="report_name">cooperar-informes.informe_cuotasostenimiento</field>
+            <field name="model">cooperar-informes.informe_cuotasostenimiento</field>
+            <field name="report">cooperar-informes/informeCuotaSostenimiento.odt</field>
+        </record>
+
+        <!-- Wizard -->
+        <record model="ir.action.wizard" id="wizard_configCuotaSostenimiento">
+            <field name="name">Configuracion Informe de Cuotas de Sostenimiento</field>
+            <field name="wiz_name">cooperar-informes.cuotasostenimiento</field>
+        </record>
+
+        <record model="ir.ui.view" id="view_cuota_sostenimiento_form">
+            <field name="model">cooperar-informes.vistacuotasostenimiento.start</field>
+            <field name="type">form</field>
+            <field name="name">cuota_sostenimiento_form</field>
+        </record>
+
+        <menuitem name="Cuotas de Sostenimiento" parent="menu_i1" sequence="0" id="menu_iu10" icon="tryton-preferences" action="wizard_configCuotaSostenimiento"/>
+
+    </data>
+</tryton>

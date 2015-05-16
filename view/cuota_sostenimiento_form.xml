@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<form string="Configuracion Parametros de Entrada">
+    <label name="deuda_al_mes" string="Deuda al Mes"/>
+    <field name="deuda_al_mes"/>
+    <label name="deuda_al_anio" string="Deuda al año"/>
+    <field name="deuda_al_anio"/>
+</form>

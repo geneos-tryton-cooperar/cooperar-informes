@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tryton>
+    <data>
+
+        <!-- Report Subdiario Ventas-->
+        <record model="ir.action.report" id="imprimir_informesubdiarioventas">
+            <field name="name">Reporte Subdiario Ventas</field>
+            <field name="report_name">cooperar-informes.informe_subdiarioventas</field>
+            <field name="model">cooperar-informes.informe_subdiarioventas</field>
+            <field name="report">cooperar-informes/informeSubdiarioVentas.odt</field>
+        </record>
+
+        <!-- Wizard -->
+        <record model="ir.action.wizard" id="wizard_configSubdiarioVentas">
+            <field name="name">Configuracion Informe de Subdiario Ventas</field>
+            <field name="wiz_name">cooperar-informes.subdiarioventas</field>
+        </record>
+
+        <record model="ir.ui.view" id="view_subdiario_ventas_form">
+            <field name="model">cooperar-informes.vistasubdiarioventas.start</field>
+            <field name="type">form</field>
+            <field name="name">subdiario_ventas_form</field>
+        </record>
+
+        <menuitem name="Subdiario Ventas" parent="menu_i1" sequence="0" id="menu_iu19" icon="tryton-preferences" action="wizard_configSubdiarioVentas"/>
+
+    </data>
+</tryton>

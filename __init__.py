@@ -6,6 +6,11 @@ from .informePagosPorConvenio import InformePagosPorConvenio, VistaConfigInforme
 from .informeCuotaSostenimientoperiodo import InformeCuotaSostenimientoPeriodo, VistaConfigInformeCuotaSostenimientoPeriodo, ConfigInformeCuotaSostenimientoPeriodo, InformeCuotaSostenimientoPeriodo
 from .informeIvaVentas import InformeIvaVentas, VistaConfigInformeIvaVentas, ConfigInformeIvaVentas, InformeIvaVentas
 from .informeIvaCompras import InformeIvaCompras, VistaConfigInformeIvaCompras, ConfigInformeIvaCompras, InformeIvaCompras
+from .informeSubdiarioCompras import InformeSubdiarioCompras, VistaConfigInformeSubdiarioCompras, ConfigInformeSubdiarioCompras, InformeSubdiarioCompras
+from .informeSubdiarioVentas import InformeSubdiarioVentas, VistaConfigInformeSubdiarioVentas, ConfigInformeSubdiarioVentas, InformeSubdiarioVentas
+from .informeSubdiarioPagos import InformeSubdiarioPagos, VistaConfigInformeSubdiarioPagos, ConfigInformeSubdiarioPagos, InformeSubdiarioPagos
+from .informeSubdiarioCobros import InformeSubdiarioCobros, VistaConfigInformeSubdiarioCobros, ConfigInformeSubdiarioCobros, InformeSubdiarioCobros
+
 
 def register ():
 
@@ -16,7 +21,11 @@ def register ():
         InformePagosPorConvenio,
         InformeCuotaSostenimientoPeriodo, 
         InformeIvaVentas, 
-        InformeIvaCompras,  
+        InformeIvaCompras, 
+        InformeSubdiarioCompras,
+        InformeSubdiarioVentas,  
+        InformeSubdiarioPagos,
+        InformeSubdiarioCobros,    
         VistaConfigInformeCuotaSostenimiento,
         VistaConfigInformeRetencionesEfectuadas,
         VistaConfigInformePrestamos,
@@ -24,6 +33,10 @@ def register ():
         VistaConfigInformeCuotaSostenimientoPeriodo, 
         VistaConfigInformeIvaVentas,
         VistaConfigInformeIvaCompras, 
+        VistaConfigInformeSubdiarioCompras,
+        VistaConfigInformeSubdiarioVentas,
+        VistaConfigInformeSubdiarioPagos, 
+        VistaConfigInformeSubdiarioCobros,
         module='cooperar-informes', type_='model'
         )
 
@@ -35,6 +48,10 @@ def register ():
         ConfigInformeCuotaSostenimientoPeriodo,
         ConfigInformeIvaVentas,
         ConfigInformeIvaCompras,
+        ConfigInformeSubdiarioCompras,
+        ConfigInformeSubdiarioVentas,
+        ConfigInformeSubdiarioPagos,
+        ConfigInformeSubdiarioCobros,
         module='cooperar-informes', type_='wizard'
         )
 
@@ -46,5 +63,9 @@ def register ():
         InformeCuotaSostenimientoPeriodo,
         InformeIvaVentas, 
         InformeIvaCompras, 
+        InformeSubdiarioCompras,
+        InformeSubdiarioVentas,
+        InformeSubdiarioPagos,
+        InformeSubdiarioCobros,
         module='cooperar-informes', type_='report'
         )

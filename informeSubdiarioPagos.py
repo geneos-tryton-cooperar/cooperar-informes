@@ -130,12 +130,21 @@ class InformeSubdiarioPagos(Report):
         #Totales
         Journal = Pool().get('account.journal')
         journal = Journal.search([('name', '=', 'Pagos')])
+        
+        data['total_retenciones_soportadas'] = '0'
+        data['total_retenciones_efectuadas'] = '0'
+        data['total_pagado'] = '0'
+        
+
         if journal:
             tuplas_totales = cls.get_totales(data['desde'],data['hasta'], journal[0])
             data['total_retenciones_soportadas'] = str(tuplas_totales[0][0])
             data['total_retenciones_efectuadas'] = str(tuplas_totales[0][1])
             data['total_pagado'] = str(tuplas_totales[0][2])
         
+
+
+
         return super(InformeSubdiarioPagos,cls).parse(report,tuplas,data,localcontext)
 
 

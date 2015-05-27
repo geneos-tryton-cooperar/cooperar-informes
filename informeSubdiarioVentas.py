@@ -144,6 +144,11 @@ class InformeSubdiarioVentas(Report):
         #Totales
         Journal = Pool().get('account.journal')
         journal = Journal.search([('name', '=', 'Ingresos')])
+        
+        data['total_gravado_con_iva'] = '0'
+        data['total_iva'] = '0'
+        data['total_facturado'] = '0'
+
         if journal:
             tuplas_totales = cls.get_totales(data['desde'],data['hasta'], journal[0])
             data['total_gravado_con_iva'] = str(tuplas_totales[0][0])

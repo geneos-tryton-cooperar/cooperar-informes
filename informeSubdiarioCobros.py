@@ -109,10 +109,10 @@ class InformeSubdiarioCobros(Report):
         for opago in opagos:
             if opago.retenciones_efectuadas:
                 for retencion_efectuada in opago.retenciones_efectuadas:
-                            total_retenciones_efectuadas += retencion_efectuada.amount
+                    total_retenciones_efectuadas += retencion_efectuada.amount
             if opago.retenciones_soportadas:
                 for retencion_soportada in opago.retenciones_soportadas:
-                            total_retenciones_soportadas += retencion_soportada.amount        
+                    total_retenciones_soportadas += retencion_soportada.amount        
 
             total_pagado += opago.amount
             

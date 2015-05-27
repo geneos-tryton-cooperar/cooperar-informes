@@ -109,10 +109,10 @@ class InformeSubdiarioPagos(Report):
         for opago in opagos:
             if opago.retenciones_efectuadas:
                 for retencion_efectuada in opago.retenciones_efectuadas:
-                            total_retenciones_efectuadas += retencion_efectuada.amount
+                        total_retenciones_efectuadas += retencion_efectuada.amount
             if opago.retenciones_soportadas:
                 for retencion_soportada in opago.retenciones_soportadas:
-                            total_retenciones_soportadas += retencion_soportada.amount        
+                        total_retenciones_soportadas += retencion_soportada.amount        
 
             total_pagado += opago.amount
             
@@ -132,7 +132,6 @@ class InformeSubdiarioPagos(Report):
         journal = Journal.search([('name', '=', 'Pagos')])
         if journal:
             tuplas_totales = cls.get_totales(data['desde'],data['hasta'], journal[0])
-            import pudb;pu.db
             data['total_retenciones_soportadas'] = str(tuplas_totales[0][0])
             data['total_retenciones_efectuadas'] = str(tuplas_totales[0][1])
             data['total_pagado'] = str(tuplas_totales[0][2])

@@ -161,10 +161,9 @@ class InformeSubdiarioCompras(Report):
         journal = Journal.search([('name', '=', 'Compras')])
         if journal:
             tuplas_totales = cls.get_totales(data['desde'],data['hasta'], journal[0])
-        
-        data['total_gravado_con_iva'] = str(tuplas_totales[0][0])
-        data['total_iva'] = str(tuplas_totales[0][1])
-        data['total_facturado'] = str(tuplas_totales[0][2])
+            data['total_gravado_con_iva'] = str(tuplas_totales[0][0])
+            data['total_iva'] = str(tuplas_totales[0][1])
+            data['total_facturado'] = str(tuplas_totales[0][2])
 
         return super(InformeSubdiarioCompras,cls).parse(report,tuplas,data,localcontext)
 

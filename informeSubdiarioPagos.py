@@ -98,7 +98,6 @@ class InformeSubdiarioPagos(Report):
     @classmethod
     def get_totales(cls, desde, hasta, journal): 
 
-        import pudb;pu.db
         Voucher = Pool().get('account.voucher')
         opagos = Voucher.search([('date', '>=', desde),('date', '<=', hasta),('journal', '=', journal)])
               

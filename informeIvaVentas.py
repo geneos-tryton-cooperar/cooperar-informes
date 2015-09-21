@@ -58,7 +58,8 @@ class InformeIvaVentas(Report):
     def resumir_datos_iva_ventas(cls, desde, hasta): 
 
         Invoices = Pool().get('account.invoice')
-        invoices_periodo = Invoices.search([('invoice_date', '>=', desde),('invoice_date', '<=', hasta),('type', '=', 'out_invoice')])
+        #Ver que no pertenezcan a un convenio
+        invoices_periodo = Invoices.search([('invoice_date', '>=', desde),('invoice_date', '<=', hasta),('type', '=', 'out_invoice'), ('convenio', '=', None)])
 
         Tuplas_Facturas = []
 

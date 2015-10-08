@@ -41,6 +41,8 @@ class ConfigInformePagosPorConvenio(Wizard):
 
     def do_imprimir(self,action):
         
+        pdb.set_trace()
+
         fechaInicio = self.start.desde.strftime('%Y-%m-%d')
         fechaFin = self.start.hasta.strftime('%Y-%m-%d')
            
@@ -106,7 +108,8 @@ class InformePagosPorConvenio(Report):
 
     @classmethod
     def parse (cls, report, objects, data, localcontext):
-
+        pdb.set_trace()
+        
         tuplas = []
         tuplas = cls.resumir_datos_clientes(data['convenioid'],data['desde'],data['hasta'])
         

@@ -23,11 +23,14 @@ class VistaConfigInformePagosPorConvenio(ModelView):
     "Vista Configuracion Parametros Entrada Reporte Pagos Por Convenio"
     __name__ = 'cooperar-informes.vistapagosporconvenio.start'
     
-    tipo_convenio = fields.Selection([
-        ('inaes', 'Inaes'),
-        ('cooperar', 'Cooperar')], 'Tipo de Convenio', select=True)
+    #tipo_convenio = fields.Selection([
+    #    ('inaes', 'Inaes'),
+    #    ('cooperar', 'Cooperar')], 'Tipo de Convenio', select=True)
 
-    convenio = fields.Many2One('convenios.convenio', 'Convenio')
+    desde = fields.Date('Desde', required=True)
+    hasta = fields.Date('Hasta', required=True)
+    convenio = fields.Many2One('convenios.convenio', 'Convenio', required=True)
+
 
 
 class ConfigInformePagosPorConvenio(Wizard):
@@ -42,19 +45,11 @@ class ConfigInformePagosPorConvenio(Wizard):
     imprimir = StateAction('cooperar-informes.imprimir_informepagosporconvenio')
 
     def do_imprimir(self,action):
-
-        datos = {}
-        if self.start.convenio:
-            if self.start.tipo_convenio:
-                datos = {'tipo_convenio':self.start.tipo_convenio, 'convenioid':self.start.convenio.id, 'conveniomonto': self.start.convenio.monto, 'conveniocodigo': self.start.convenio.codigo}
-            else:
-                datos = {'tipo_convenio':'', 'convenioid':'', 'conveniomonto': '', 'conveniocodigo': ''}    
-        else:
-            if self.start.tipo_convenio:
-                datos = {'tipo_convenio':self.start.tipo_convenio, 'convenioid':'', 'conveniomonto': '', 'conveniocodigo': ''}
-            else:
-                datos = {'tipo_convenio':'', 'convenioid':'', 'conveniomonto': '', 'conveniocodigo': ''}
-               
+        
+        fechaInicio = self.start.desde.strftime('%Y-%m-%d')
+        fechaFin = self.start.hasta.strftime('%Y-%m-%d')
+           
+        datos = {'desde':fechaInicio, 'hasta':fechaFin, 'tipo_convenio':self.start.convenio.tipo_convenio, 'convenioid':self.start.convenio.id, 'conveniomonto': self.start.convenio, 'conveniocodigo': self.start.convenio.codigo}
         return action, datos
 
 # Reporte Pagos Por Convenio
@@ -64,21 +59,51 @@ class InformePagosPorConvenio(Report):
     __name__ = 'cooperar-informes.informe_pagosporconvenio'
 
     @classmethod
-    def resumir_datos_clientes(cls, tipo_convenio, convenioid): 
+    def resumir_datos_clientes(cls, convenioid, desde, hasta): 
 
         Pagos = Pool().get('account.voucher')
-        if tipo_convenio != '':
-            #Filtro por Tipo de Convenio
-            pagos = Pagos.search([('convenio.tipo_convenio', '=', tipo_convenio), ('voucher_type', '=', 'payment')])
-        else:
-            #Filtro por convenio
-            pagos = Pagos.search([('convenio.id', '=', convenioid), ('voucher_type', '=', 'payment')])
+        #Filtro por convenio
+        pagos = Pagos.search([('convenio.id', '=', convenioid), ('voucher_type', '=', 'payment'), ('date','>=', desde), ('date','<=', hasta)])
         
+        inicial = 0
+        Convenios = Pool().get('convenios.convenio')
+        convenio = Convenios.search([('id', '=', convenioid)])
+        
+        if convenio:
+            inicial = convenio[0].monto
+
         Tuplas_Pagos = []
-
+        Tuplas_Pagos.append(('', '', '', '', '', '', '', '', '', '', 'Saldo Inicial', inicial))
+                        
         for pago in pagos:
-            Tuplas_Pagos.append((pago.party.name, pago.number, pago.date, pago.state, pago.amount))
+            #Orden: 
+            #Fecha de operacion, Cheque Nro, Medio de Pago, Proveedor, CUIT Prov, Tipo de Comp, Nro Comp, Fecha Comp, Importe Comprobante, Importe pago, "SALDO INICIAL", valor original y DESCONTANDO)
+            
+            #Numero de cheque si hay
+            cheque_nro = ''
+            for cheque in pago.issued_check:
+                cheque_nro = cheque.name
+            #Tipo, Numero, Fecha, Importe de comprobante de alguna linea que este cancelada en las facturas de prov.
+            comprobante_tipo = ''
+            comprobante_nro = ''
+            comprobante_fecha = ''
+            comprobante_valor = 0
+            for line in pago.lines:
+                if int(line.amount) > 0:
+                    comprobante_nro = line.name
+                    comprobante_valor = line.amount_original
+                    Invoice = Pool().get('account.invoice')
+                    invoices = Invoice.search([('number', '=', line.name)])
+                    if invoices:
+                        comprobante_tipo = invoices[0].invoice_type
+                        comprobante_fecha = invoice[0].invoice_date
 
+            saldo = inicial - pago.amount_to_pay
+            
+            Tuplas_Pagos.append((pago.date, cheque_nro, pago.pay_lines[0].pay_mode.name, 
+                        pago.party.name, pago.party.vat_number, comprobante_tipo, comprobante_nro, comprobante_fecha
+                        comprobante_valor, pago.amount_to_pay, '', saldo)
+             
         return Tuplas_Pagos
 
 
@@ -86,7 +111,7 @@ class InformePagosPorConvenio(Report):
     def parse (cls, report, objects, data, localcontext):
 
         tuplas = []
-        tuplas = cls.resumir_datos_clientes(data['tipo_convenio'], data['convenioid'])
+        tuplas = cls.resumir_datos_clientes(data['convenioid'],data['desde'],data['hasta'])
         
         return super(InformePagosPorConvenio,cls).parse(report,tuplas,data,localcontext)
 

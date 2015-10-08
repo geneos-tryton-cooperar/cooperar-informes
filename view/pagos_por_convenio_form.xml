@@ -1,7 +1,9 @@
 <?xml version="1.0"?>
 <form string="Configuracion Parametros de Entrada">
-    <label name="tipo_convenio" string="Tipo de Convenio"/>
-    <field name="tipo_convenio"/>
+    <label name="desde"/>
+    <field name="desde"/>
+    <label name="hasta"/>
+    <field name="hasta"/>
     <label name="convenio" string="Convenio"/>
     <field name="convenio"/>
 </form>

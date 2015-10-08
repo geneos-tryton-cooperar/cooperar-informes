@@ -23,14 +23,9 @@ class VistaConfigInformePagosPorConvenio(ModelView):
     "Vista Configuracion Parametros Entrada Reporte Pagos Por Convenio"
     __name__ = 'cooperar-informes.vistapagosporconvenio.start'
     
-    #tipo_convenio = fields.Selection([
-    #    ('inaes', 'Inaes'),
-    #    ('cooperar', 'Cooperar')], 'Tipo de Convenio', select=True)
-
     desde = fields.Date('Desde', required=True)
     hasta = fields.Date('Hasta', required=True)
     convenio = fields.Many2One('convenios.convenio', 'Convenio', required=True)
-
 
 
 class ConfigInformePagosPorConvenio(Wizard):
@@ -60,6 +55,8 @@ class InformePagosPorConvenio(Report):
 
     @classmethod
     def resumir_datos_clientes(cls, convenioid, desde, hasta): 
+
+        pdb.set_trace()
 
         Pagos = Pool().get('account.voucher')
         #Filtro por convenio

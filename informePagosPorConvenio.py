@@ -102,7 +102,7 @@ class InformePagosPorConvenio(Report):
             
             Tuplas_Pagos.append((pago.date, cheque_nro, pago.pay_lines[0].pay_mode.name, 
                         pago.party.name, pago.party.vat_number, comprobante_tipo, comprobante_nro, comprobante_fecha,
-                        comprobante_valor, pago.amount_to_pay, '', saldo)
+                        comprobante_valor, pago.amount_to_pay, '', saldo))
              
         return Tuplas_Pagos
 

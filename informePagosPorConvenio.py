@@ -49,7 +49,7 @@ class ConfigInformePagosPorConvenio(Wizard):
         fechaInicio = self.start.desde.strftime('%Y-%m-%d')
         fechaFin = self.start.hasta.strftime('%Y-%m-%d')
            
-        datos = {'desde':fechaInicio, 'hasta':fechaFin, 'tipo_convenio':self.start.convenio.tipo_convenio, 'convenioid':self.start.convenio.id, 'conveniomonto': self.start.convenio, 'conveniocodigo': self.start.convenio.codigo}
+        datos = {'desde':fechaInicio, 'hasta':fechaFin, 'convenioid':self.start.convenio.id, 'conveniomonto': self.start.convenio, 'conveniocodigo': self.start.convenio.codigo}
         return action, datos
 
 # Reporte Pagos Por Convenio

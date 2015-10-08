@@ -40,13 +40,11 @@ class ConfigInformePagosPorConvenio(Wizard):
     imprimir = StateAction('cooperar-informes.imprimir_informepagosporconvenio')
 
     def do_imprimir(self,action):
-        
-        pdb.set_trace()
-
+                
         fechaInicio = self.start.desde.strftime('%Y-%m-%d')
         fechaFin = self.start.hasta.strftime('%Y-%m-%d')
            
-        datos = {'desde':fechaInicio, 'hasta':fechaFin, 'convenioid':self.start.convenio.id, 'conveniomonto': self.start.convenio, 'conveniocodigo': self.start.convenio.codigo}
+        datos = {'desde':fechaInicio, 'hasta':fechaFin, 'convenioid':self.start.convenio.id, 'conveniomonto': self.start.convenio.monto, 'conveniocodigo': self.start.convenio.codigo}
         return action, datos
 
 # Reporte Pagos Por Convenio
@@ -57,9 +55,7 @@ class InformePagosPorConvenio(Report):
 
     @classmethod
     def resumir_datos_clientes(cls, convenioid, desde, hasta): 
-
-        pdb.set_trace()
-
+        
         Pagos = Pool().get('account.voucher')
         #Filtro por convenio
         pagos = Pagos.search([('convenio.id', '=', convenioid), ('voucher_type', '=', 'payment'), ('date','>=', desde), ('date','<=', hasta)])
@@ -107,8 +103,7 @@ class InformePagosPorConvenio(Report):
 
 
     @classmethod
-    def parse (cls, report, objects, data, localcontext):
-        pdb.set_trace()
+    def parse (cls, report, objects, data, localcontext):        
 
         tuplas = []
         tuplas = cls.resumir_datos_clientes(data['convenioid'],data['desde'],data['hasta'])

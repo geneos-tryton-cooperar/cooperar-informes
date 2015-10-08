@@ -10,7 +10,7 @@ from datetime import *
 from sql import *
 from sql.aggregate import *
 from sql.conditionals import *
-
+import pdb
 
 class InformePagosPorConvenio(ModelSQL):
     "Informes Pagos por Convenio"
@@ -109,7 +109,7 @@ class InformePagosPorConvenio(Report):
     @classmethod
     def parse (cls, report, objects, data, localcontext):
         pdb.set_trace()
-        
+
         tuplas = []
         tuplas = cls.resumir_datos_clientes(data['convenioid'],data['desde'],data['hasta'])
         

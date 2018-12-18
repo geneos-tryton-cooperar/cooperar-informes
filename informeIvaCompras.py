@@ -144,7 +144,9 @@ class InformeIvaCompras(Report):
         invoices_periodo = Invoices.search([('invoice_date', '>=', desde),('invoice_date', '<=', hasta),('type', '=', 'in_invoice')])       
 
         total_gravado_con_iva = 0
-        total_iva = 0
+        total_iva_21 = 0
+        total_iva_105 = 0
+        total_iva_27 = 0
         total_no_gravado_con_iva = 0 
         total_facturado = 0
         

@@ -181,6 +181,7 @@ class InformeIvaCompras(Report):
     def parse (cls, report, objects, data, localcontext):
 
         tuplas = []
+        import pudb;pu.db
         tuplas = cls.resumir_datos_iva_compras(data['desde'],data['hasta'])
         #Totales
         tuplas_totales = cls.get_totales(data['desde'],data['hasta'])

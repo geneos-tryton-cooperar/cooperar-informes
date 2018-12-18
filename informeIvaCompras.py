@@ -62,6 +62,12 @@ class InformeIvaCompras(Report):
 
         Tuplas_Facturas = []
 
+        subtotal_gravado_con_iva = 0
+        subtotal_no_gravado_con_iva = 0
+        subtotal_iva_21 = 0
+        subtotal_iva_105 = 0
+        subtotal_iva_27 = 0
+
         for invoice_periodo in invoices_periodo:
             #Ver Totales
             #Ver Columnas IVA COMPRAS

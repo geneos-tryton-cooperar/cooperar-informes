@@ -67,10 +67,12 @@ class InformeIvaCompras(Report):
             #Ver Columnas IVA COMPRAS
             #Ver impuestos.grupo: IVA, IIBB, GANANCIAS -> Muestro SOLO IVA
             subtotal_gravado_con_iva = cls.get_total_gravado_con_iva_por_factura(invoice_periodo)
-            subtotal_iva = cls.get_total_iva_por_factura(invoice_periodo)
+            subtotal_iva_21 = cls.get_total_iva_por_factura_21(invoice_periodo)
+            subtotal_iva_105 = cls.get_total_iva_por_factura_105(invoice_periodo)
+            subtotal_iva_27 = cls.get_total_iva_por_factura_27(invoice_periodo)
             subtotal_no_gravado_con_iva = cls.get_total_no_gravado_con_iva_por_factura(invoice_periodo)
 
-            Tuplas_Facturas.append((invoice_periodo.invoice_date, invoice_periodo.party.name, invoice_periodo.number, invoice_periodo.party.vat_number, subtotal_gravado_con_iva, subtotal_no_gravado_con_iva, subtotal_iva, invoice_periodo.total_amount))
+            Tuplas_Facturas.append((invoice_periodo.invoice_date, invoice_periodo.party.name, invoice_periodo.number, invoice_periodo.party.vat_number, subtotal_gravado_con_iva, subtotal_no_gravado_con_iva, subtotal_iva_21, subtotal_iva_105, subtotal_iva_27, invoice_periodo.total_amount))
 
 
         return Tuplas_Facturas
@@ -101,14 +103,39 @@ class InformeIvaCompras(Report):
         return total_gravado
 
     @classmethod
-    def get_total_iva_por_factura(cls, invoice): 
+    def get_total_iva_por_factura_21(cls, invoice): 
 
         total_iva = 0
         for tax in invoice.taxes:
-            if tax.tax.group.name == 'IVA':
+            #if tax.tax.group.name == 'IVA':
+            if tax.tax.name == 'IVA Compras 21%':                
                 total_iva += tax.amount
 
         return total_iva
+
+    @classmethod
+    def get_total_iva_por_factura_105(cls, invoice): 
+
+        total_iva = 0
+        for tax in invoice.taxes:
+            #if tax.tax.group.name == 'IVA':
+            if tax.tax.name == 'IVA Compras 10.5%':                
+                total_iva += tax.amount
+
+        return total_iva
+
+
+    @classmethod
+    def get_total_iva_por_factura_27(cls, invoice): 
+
+        total_iva = 0
+        for tax in invoice.taxes:
+            #if tax.tax.group.name == 'IVA':
+            if tax.tax.name == 'IVA Compras 27%':                                            
+                total_iva += tax.amount
+
+        return total_iva
+
 
     @classmethod
     def get_totales(cls, desde, hasta): 
@@ -124,16 +151,20 @@ class InformeIvaCompras(Report):
         for invoice_periodo in invoices_periodo:
             
             subtotal_gravado_con_iva = cls.get_total_gravado_con_iva_por_factura(invoice_periodo)
-            subtotal_iva = cls.get_total_iva_por_factura(invoice_periodo)
+            subtotal_iva_21 = cls.get_total_iva_por_factura_21(invoice_periodo)
+            subtotal_iva_105 = cls.get_total_iva_por_factura_105(invoice_periodo)
+            subtotal_iva_27 = cls.get_total_iva_por_factura_27(invoice_periodo)
             subtotal_no_gravado_con_iva = cls.get_total_no_gravado_con_iva_por_factura(invoice_periodo)
 
             total_gravado_con_iva += subtotal_gravado_con_iva
-            total_iva += subtotal_iva
+            total_iva_21 += subtotal_iva_21
+            total_iva_105 += subtotal_iva_105
+            total_iva_27 += subtotal_iva_27
             total_no_gravado_con_iva += subtotal_no_gravado_con_iva
             total_facturado += invoice_periodo.total_amount
             
         Tuplas_Totales = []
-        Tuplas_Totales.append((total_gravado_con_iva, total_iva, total_no_gravado_con_iva, total_facturado))
+        Tuplas_Totales.append((total_gravado_con_iva, total_iva_21, total_iva_105, total_iva_27, total_no_gravado_con_iva, total_facturado))
         return Tuplas_Totales
 
         
@@ -147,9 +178,11 @@ class InformeIvaCompras(Report):
         tuplas_totales = cls.get_totales(data['desde'],data['hasta'])
         
         data['total_gravado_con_iva'] = str(tuplas_totales[0][0])
-        data['total_iva'] = str(tuplas_totales[0][1])
-        data['total_no_gravado_con_iva'] = str(tuplas_totales[0][2])
-        data['total_facturado'] = str(tuplas_totales[0][3])
+        data['total_iva_21'] = str(tuplas_totales[0][1])
+        data['total_iva_105'] = str(tuplas_totales[0][2])
+        data['total_iva_27'] = str(tuplas_totales[0][3])
+        data['total_no_gravado_con_iva'] = str(tuplas_totales[0][4])
+        data['total_facturado'] = str(tuplas_totales[0][5])
 
         return super(InformeIvaCompras,cls).parse(report,tuplas,data,localcontext)
 

@@ -180,9 +180,9 @@ class InformeIvaCompras(Report):
         tuplas_totales = cls.get_totales(data['desde'],data['hasta'])
         
         data['total_gravado_con_iva'] = str(tuplas_totales[0][0])
-        data['total_iva_21'] = str(tuplas_totales[0][1])
-        data['total_iva_105'] = str(tuplas_totales[0][2])
-        data['total_iva_27'] = str(tuplas_totales[0][3])
+        #data['total_iva_21'] = str(tuplas_totales[0][1])
+        #data['total_iva_105'] = str(tuplas_totales[0][2])
+        #data['total_iva_27'] = str(tuplas_totales[0][3])
         data['total_no_gravado_con_iva'] = str(tuplas_totales[0][4])
         data['total_facturado'] = str(tuplas_totales[0][5])
 

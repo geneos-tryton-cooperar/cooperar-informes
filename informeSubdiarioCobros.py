@@ -67,7 +67,10 @@ class InformeSubdiarioCobros(Report):
             opagos = Voucher.search([('date', '>=', desde),('date', '<=', hasta),('journal', '=', journal[0])], order=[('date', 'ASC')])
             if opagos:
                 for opago in opagos:
-                    move_number = opago.move.lines[0].id
+                    if opago.move: 
+                        move_number = opago.move.lines[0].id
+                    else: 
+                        move_number = ''
                     
                     #Retenciones
                     retenciones_efectuadas = 0

@@ -69,8 +69,10 @@ class InformeSubdiarioCobros(Report):
                 for opago in opagos:
                     if opago.move: 
                         move_number = opago.move.lines[0].id
+                        move_date = opago.move.date
                     else: 
                         move_number = ''
+                        move_date = opago.date
                     
                     #Retenciones
                     retenciones_efectuadas = 0
@@ -82,7 +84,7 @@ class InformeSubdiarioCobros(Report):
                         for retencion_soportada in opago.retenciones_soportadas:
                             retenciones_soportadas += retencion_soportada.amount
                     
-                    Tuplas_Asientos.append((opago.move.date, move_number, 'Recibo', 
+                    Tuplas_Asientos.append((move_date, move_number, 'Recibo', 
                                             opago.number, opago.date, opago.party.name, opago.party.iva_condition, 
                                             opago.party.vat_number, retenciones_soportadas, retenciones_efectuadas,  opago.amount))
            

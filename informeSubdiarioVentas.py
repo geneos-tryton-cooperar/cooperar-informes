@@ -72,7 +72,6 @@ class InformeSubdiarioVentas(Report):
                     else: 
                         move_number = ''                        
 
-                    move_number = invoice.move.lines[0].id
                     #TODO: Tipo de Factura
 
                     subtotal_gravado_con_iva = cls.get_total_gravado_con_iva_por_factura(invoice)

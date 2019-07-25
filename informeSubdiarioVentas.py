@@ -60,7 +60,7 @@ class InformeSubdiarioVentas(Report):
         #Busco Journal de Ventas
         Journal = Pool().get('account.journal')
         #No es Ventas, es Ingresos
-        journal = Journal.search([('name', '=', 'Ingresos')])
+        journal = Journal.search([('name', '=', 'Cobros')])
         if journal:
             #Traigo las Invoice -> de ese Journal entre fechas (invoice_date)
             Invoice = Pool().get('account.invoice')

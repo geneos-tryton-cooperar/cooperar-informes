@@ -69,7 +69,7 @@ class InformeIvaCompras(Report):
         subtotal_iva_27 = 0
 
         for invoice_periodo in invoices_periodo:
-            import pudb;pu.db
+            
             #Ver Totales
             #Ver Columnas IVA COMPRAS
             #Ver impuestos.grupo: IVA, IIBB, GANANCIAS -> Muestro SOLO IVA

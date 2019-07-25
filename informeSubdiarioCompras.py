@@ -60,8 +60,8 @@ class InformeSubdiarioCompras(Report):
         #import pudb;pu.db
         #Busco Journal de Compras
         Journal = Pool().get('account.journal')
-        #journal = Journal.search([('name', '=', 'Compras')])
-        journal = Journal.search([('name', '=', 'Gastos')])
+        journal = Journal.search([('name', '=', 'Compras')])
+        #journal = Journal.search([('name', '=', 'Gastos')])
         if journal:
             #Traigo las Invoice -> de ese Journal entre fechas (invoice_date)
             Invoice = Pool().get('account.invoice')

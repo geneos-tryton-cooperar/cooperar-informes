@@ -67,6 +67,11 @@ class InformeSubdiarioVentas(Report):
             invoices = Invoice.search([('invoice_date', '>=', desde),('invoice_date', '<=', hasta),('journal', '=', journal[0])], order=[('invoice_date', 'ASC')])
             if invoices:
                 for invoice in invoices:
+                    if invoice.move: 
+                        move_number = invoice.move.lines[0].id                        
+                    else: 
+                        move_number = ''                        
+
                     move_number = invoice.move.lines[0].id
                     #TODO: Tipo de Factura
 

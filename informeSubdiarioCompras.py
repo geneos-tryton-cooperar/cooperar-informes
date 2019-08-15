@@ -71,7 +71,7 @@ class InformeSubdiarioCompras(Report):
                     if invoice.move: 
                         move_number = invoice.move.lines[0].id                        
                     else: 
-                        move_number = ''                        
+                        move_number = ''                       
                     
                     #TODO: Tipo de Factura de Proveedor
 

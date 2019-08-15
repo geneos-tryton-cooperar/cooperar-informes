@@ -68,7 +68,11 @@ class InformeSubdiarioCompras(Report):
             invoices = Invoice.search([('invoice_date', '>=', desde),('invoice_date', '<=', hasta),('journal', '=', journal[0])], order=[('invoice_date', 'ASC')])
             if invoices:
                 for invoice in invoices:
-                    move_number = invoice.move.lines[0].id
+                    if invoice.move: 
+                        move_number = invoice.move.lines[0].id                        
+                    else: 
+                        move_number = ''                        
+                    
                     #TODO: Tipo de Factura de Proveedor
 
                     subtotal_gravado_con_iva = cls.get_total_gravado_con_iva_por_factura(invoice)

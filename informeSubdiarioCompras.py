@@ -69,10 +69,10 @@ class InformeSubdiarioCompras(Report):
             if invoices:
                 for invoice in invoices:
                     if (invoice.state != 'draft') and (invoice.state != 'cancel') and (invoice.state != 'validated'):
-                    if invoice.move: 
-                        move_number = invoice.move.lines[0].id                        
-                    else: 
-                        move_number = ''                       
+                        if invoice.move: 
+                            move_number = invoice.move.lines[0].id                        
+                        else: 
+                            move_number = ''                       
                     
                     #TODO: Tipo de Factura de Proveedor
 
